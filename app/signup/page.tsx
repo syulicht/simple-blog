@@ -20,8 +20,12 @@ const Page = () => {
             console.log(error);
             setMsg(error.message);
         } else {
-            console.log(data);
-            router.push('login');
+            const { error } = await supabase.from('user').insert({email : data.user?.email, username : name, userId : data.user?.id});
+            if(error) {
+                console.log(error);
+            } else {
+                router.push("/login");
+            }
         }
     }
   return (
