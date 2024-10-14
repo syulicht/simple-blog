@@ -35,9 +35,9 @@ const Page = () => {
         <Header />
         {
             latestData ?
-            <div className='prose'>
-                <h1>{latestData.title}</h1>
-                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(latestData.content) }} />
+            <div className='prose max-w-3xl mx-auto my-8 p-4 bg-white shadow-lg rounded-lg'>
+                <h1 className='text-3xl font-bold text-gray-800 mb-4'>{latestData.title}</h1>
+                <div className='text-gray-700' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(latestData.content) }} />
             </div>
             : <></>
         }

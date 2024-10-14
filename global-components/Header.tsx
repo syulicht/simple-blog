@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header className='flex items-center justify-between bg-gray-800 text-white'>
         <div>
-            <Image src={'/blog_logo.png'} width={150} height={100} alt='' />
+            <Image src={'/blog_logo.png'} width={140} height={100} alt='' />
         </div>
         <div onClick={() => setSideOpen(sideOpen ? false : true)} className="cursor-pointer z-20 mr-4">
             {!sideOpen ? <Image src={'/menu_icon.svg'} width={50} height={50} alt='' /> : <Image src={'/close_icon.svg'} width={50} height={50} alt='' />}
