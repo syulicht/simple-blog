@@ -1,12 +1,15 @@
 "use client"
 import Header from '@/global-components/Header';
+import { Article } from '@/types/article';
 import { User } from '@/types/user';
 import { supabase } from '@/util/supabase';
 import { useRouter } from 'next/navigation';
+import DOMPurify from 'dompurify';
 import React, { useEffect, useState } from 'react'
 
 const Page = () => {
     const [user, setUser] = useState<User | null>(null);
+    const [latestData, setLatestData] = useState<Article | null>(null);
     const router = useRouter();
     const getUser = async() => {
         const {data} = await supabase.auth.getSession();
@@ -18,13 +21,26 @@ const Page = () => {
         }
     }
 
+    const getLatestArticle = async()=> {
+        const data = await supabase.from('article').select("*").order('created_at', { ascending: false }).limit(1);
+        setLatestData(data.data![0]);
+    } 
     useEffect(() => {
         getUser();
+        getLatestArticle();
         console.log(user);
     }, []);
   return (
     <div>
         <Header />
+        {
+            latestData ?
+            <div className='prose'>
+                <h1>{latestData.title}</h1>
+                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(latestData.content) }} />
+            </div>
+            : <></>
+        }
     </div>
   )
 }

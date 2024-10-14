@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import typography from '@tailwindcss/typography';
+
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}', // ここがNext.jsの構造に合っているか確認
@@ -9,6 +11,8 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    typography,
+  ],
 }
 

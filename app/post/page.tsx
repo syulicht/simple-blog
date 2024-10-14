@@ -13,7 +13,7 @@ const Page = () => {
         const {data} = await supabase.auth.getSession();
         if(data.session){
             const user = await supabase.from('user').select("*").eq("userId",  data.session.user.id);
-            setUser(user as unknown as User);
+            setUser((user.data![0]) as unknown as User);
         } else {
             router.push("/login");
         }
@@ -24,8 +24,9 @@ const Page = () => {
         console.log(user);
     }, []);
 
-    const postArticle = (title : string, content : string) => {
-        console.log(title, content);
+    const postArticle = async(title : string, content : string) => {
+        await supabase.from('article').insert({title : title, content : content, userId : user?.userId});
+        router.push("/main");
     }
   return (
     <div>
