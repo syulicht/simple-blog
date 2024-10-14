@@ -1,5 +1,4 @@
 import React, { FormEvent, useState } from 'react'
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 type Props = {
@@ -22,7 +21,7 @@ const PostForm = (props: Props) => {
             </div>
             <div>
                 <label>Content</label>
-                <ReactQuill value={content} onChange={setContent} placeholder='記事の内容' />
+                <textarea onChange={e => setContent(e.target.value)}></textarea>
             </div>
             <button type='submit'>Submit</button>
         </form>
